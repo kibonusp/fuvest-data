@@ -2,6 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import os
+import pdfkit
 
 categorias = ["Geral", "AC", "EP", "PPI"]
 
@@ -279,3 +280,6 @@ categoriasDados["PPI"][4], comentsHTMlFormat
 html_file= open("index.html","w")
 html_file.write(html_str)
 html_file.close()
+
+# Criando pdf
+pdfkit.from_file("index.html", "dados.pdf")
