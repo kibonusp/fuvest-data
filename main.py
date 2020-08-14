@@ -167,15 +167,29 @@ def criaChamadaGrafico (chamadakeys, chamadavalues):
     chamadaGrafico.set_title("Porcentagem de ingressos em cada chamada")
     plt.savefig("chamadas.jpg")
     plt.cla()
-        
 
-# Planilha 2020: https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-M1Qo-XJiDiNczwz7AY0vEhSlBvRqMEmPPBfMsks27GYqqIquaTneYklLOzyzwgI_2uIjLNuwhhdx/pub?gid=0&single=true&output=csv
-# Comentários 2020: https://docs.google.com/document/d/e/2PACX-1vQmhDyFRRS9XFCKKMdpZnalN2zsLbsBzHfSsoCVu1Pl5PmV7qrqwAQm4eFYyenYT7GVIo3XHz9lw754/pub
+def comentarioHTML (comentarios):
+    comentarioList = []
+    '''
+    <p>Comentario1</p>
+    <p>Comentario2</p>
+    <p>Comentario3</p>
+    '''
+    comentarios = [comentario for comentario in comentarios if str(comentario) != 'nan']
+    for comentario in comentarios:
+        if comentario:
+            comentarioList.append("<p>{}</p>".format(comentario))
+    comentarioString = "\n".join(comentarioList)
+    return comentarioString
+
+# Planilha 2020: https://docs.google.com/spreadsheets/d/e/2PACX-1vS7-ibfSlLbqw3L6lhcXCIOK1KA2TJhIoCQfM5RXJmzvs2EGPHm3GvWdgYSf7cc3a0jqIZizvjtie1o/pub?gid=1644314308&single=true&output=csv
 arquivoCSV = input("Digite o link da planilha: ")
 Geral = pd.read_csv(arquivoCSV)
 ac = Geral[(Geral.Modalidade == "AC")]
 ep = Geral[Geral.Modalidade == "EP"]
 ppi = Geral[Geral.Modalidade == "PPI"]
+comentarios = Geral["Comentário"].tolist()
+comentsHTMlFormat = comentarioHTML(comentarios)
 chamadas = Geral.pivot_table(index=["Chamada"], aggfunc="size")
 chamadakeys = chamadas.keys().tolist()
 chamadavalues = chamadas.values.tolist()
@@ -252,12 +266,15 @@ html_str = '''<!DOCTYPE html>
                 <img src="PPI/ppiFinal.jpg" alt="Histograma com as notas finais" class="center">
             </center>
         <h1 align="center">Mensagens dos Veteranos</h1>
+            <center>
+                {}
+            </center>
     </body>
 </html>'''.format(categoriasDados["Geral"][0], categoriasDados["Geral"][1], categoriasDados["Geral"][2], categoriasDados["Geral"][3],
 categoriasDados["Geral"][4], categoriasDados["AC"][0], categoriasDados["AC"][1], categoriasDados["AC"][2], categoriasDados["AC"][3],
 categoriasDados["AC"][4], categoriasDados["EP"][0], categoriasDados["EP"][1], categoriasDados["EP"][2], categoriasDados["EP"][3],
 categoriasDados["EP"][4], categoriasDados["PPI"][0], categoriasDados["PPI"][1], categoriasDados["PPI"][2], categoriasDados["PPI"][3],
-categoriasDados["PPI"][4]
+categoriasDados["PPI"][4], comentsHTMlFormat
 )
 html_file= open("index.html","w")
 html_file.write(html_str)
