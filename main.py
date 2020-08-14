@@ -3,16 +3,19 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os
 
-categorias = ["Tudo", "AC", "EP", "PPI"]
+categorias = ["Geral", "AC", "EP", "PPI"]
+
+categoriasDados = dict()
 
 def printaDados(categoria, conhecimento, fase2_1, fase2_2, redacao, final):
-    print("A média da categoria", categoria, "em Conhecimentos Gerais foi".format(round(np.mean(conhecimento), 2)))
-    print("A média da categoria", categoria, "no 1º dia da 2ª fase foi {}".format(round(np.mean(fase2_1), 2)))
-    print("A média da categoria", categoria, "no 2º dia da 2ª fase foi {}".format(round(np.mean(fase2_2), 2)))
-    print("A média da categoria", categoria, "em Redação foi {}".format(round(np.mean(redacao), 2)))
-    print("A média da categoria", categoria, "na Nota Final foi {}".format(round(np.mean(final),2)))
+    conhecimentoString = "A média da categoria " + categoria + " em Conhecimentos Gerais foi {}".format(round(np.mean(conhecimento), 2))
+    fase21String = "A média da categoria " + categoria + " no 1º dia da 2ª fase foi {}".format(round(np.mean(fase2_1), 2))
+    fase22String = "A média da categoria " + categoria + " no 2º dia da 2ª fase foi {}".format(round(np.mean(fase2_2), 2))
+    redacaoString = "A média da categoria " + categoria + " em Redação foi {}".format(round(np.mean(redacao), 2))
+    finalString = "A média da categoria " + categoria + " na Nota Final foi {}".format(round(np.mean(final),2))
+    categoriasDados[categoria] = [conhecimentoString, fase21String, fase22String, redacaoString, finalString]
 
-def criandoGraficosTudo(categoria, conhecimento, fase2_1, fase2_2, redacao, final):
+def criandoGraficosGeral(categoria, conhecimento, fase2_1, fase2_2, redacao, final):
     # Gráfico de Conhecimentos Gerais
     conheciFigura = plt.figure()
     conheciGrafico = conheciFigura.add_subplot(111)
@@ -20,7 +23,7 @@ def criandoGraficosTudo(categoria, conhecimento, fase2_1, fase2_2, redacao, fina
     conheciGrafico.set_xlabel("Notas")
     conheciGrafico.set_ylabel("Quantidade")
     conheciGrafico.set_title("Notas de Conhecimento Geral")
-    plt.savefig("./Tudo/tudoConhecimento.jpg")
+    plt.savefig("./Geral/GeralConhecimento.jpg")
     plt.cla()
 
     # Gráfico do dia 1 da fase 2
@@ -30,7 +33,7 @@ def criandoGraficosTudo(categoria, conhecimento, fase2_1, fase2_2, redacao, fina
     fase21Grafico.set_xlabel("Notas")
     fase21Grafico.set_ylabel("Quantidade")
     fase21Grafico.set_title("Notas no 1º dia da 2ª fase")
-    plt.savefig("./Tudo/tudoFase21.jpg")
+    plt.savefig("./Geral/GeralFase21.jpg")
     plt.cla()
 
     # Gráfico do dia 2 da fase 2ª fase
@@ -40,7 +43,7 @@ def criandoGraficosTudo(categoria, conhecimento, fase2_1, fase2_2, redacao, fina
     fase22Grafico.set_xlabel("Notas")
     fase22Grafico.set_ylabel("Quantidade")
     fase22Grafico.set_title("Notas no 2º dia da 2ª fase")
-    plt.savefig("./Tudo/tudoFase22.jpg")
+    plt.savefig("./Geral/GeralFase22.jpg")
     plt.cla()
 
     # Gráfico da Redação
@@ -50,7 +53,7 @@ def criandoGraficosTudo(categoria, conhecimento, fase2_1, fase2_2, redacao, fina
     redacaoGrafico.set_xlabel("Notas")
     redacaoGrafico.set_ylabel("Quantidade")
     redacaoGrafico.set_title("Notas da Redação")
-    plt.savefig("./Tudo/tudoRedacao.jpg")
+    plt.savefig("./Geral/GeralRedacao.jpg")
     plt.cla()
 
     # Gráfico da Nota Final
@@ -60,12 +63,12 @@ def criandoGraficosTudo(categoria, conhecimento, fase2_1, fase2_2, redacao, fina
     finalGrafico.set_xlabel("Notas")
     finalGrafico.set_ylabel("Quantidade")
     finalGrafico.set_title("Notas Finais")
-    plt.savefig("./Tudo/tudoFinal.jpg")
+    plt.savefig("./Geral/GeralFinal.jpg")
     plt.cla()
 
 def criandoGraficos(categoria, conhecimento, fase2_1, fase2_2, redacao, final):
-    if categoria == "Tudo":
-        criandoGraficosTudo(categoria, conhecimento, fase2_1, fase2_2, redacao, final)
+    if categoria == "Geral":
+        criandoGraficosGeral(categoria, conhecimento, fase2_1, fase2_2, redacao, final)
     else:
         # Gráfico de Conhecimentos Gerais
         conheciFigura = plt.figure()
@@ -120,19 +123,18 @@ def criandoGraficos(categoria, conhecimento, fase2_1, fase2_2, redacao, final):
         plt.close()
         
 
-def criaDados(categorias, tudo, ac, ep, ppi):
+def criaDados(categorias, Geral, ac, ep, ppi):
     for categoria in categorias:
-        print("-------------------------------------------------------------------------------------------")
         if not os.path.isdir(categoria):
             os.makedirs(categoria)
-        if categoria == "Tudo":
-            conhecimentoTudo = tudo["Conhecimentos Gerais"].values.tolist()
-            fase2_1Tudo = tudo["2ª fase - 1º dia"].values.tolist()
-            fase2_2Tudo =  tudo["2ª fase - 2º dia"].values.tolist()
-            redacaoTudo = tudo["Redação"].values.tolist()
-            finalTudo = tudo["Nota Final"].values.tolist()
-            printaDados(categoria, conhecimentoTudo, fase2_1Tudo, fase2_2Tudo, redacaoTudo, finalTudo)
-            criandoGraficos(categoria, conhecimentoTudo, fase2_1Tudo, fase2_2Tudo, redacaoTudo, finalTudo)
+        if categoria == "Geral":
+            conhecimentoGeral = Geral["Conhecimentos Gerais"].values.tolist()
+            fase2_1Geral = Geral["2ª fase - 1º dia"].values.tolist()
+            fase2_2Geral =  Geral["2ª fase - 2º dia"].values.tolist()
+            redacaoGeral = Geral["Redação"].values.tolist()
+            finalGeral = Geral["Nota Final"].values.tolist()
+            printaDados(categoria, conhecimentoGeral, fase2_1Geral, fase2_2Geral, redacaoGeral, finalGeral)
+            criandoGraficos(categoria, conhecimentoGeral, fase2_1Geral, fase2_2Geral, redacaoGeral, finalGeral)
         elif categoria == "AC":
             conhecimentoAC = ac["Conhecimentos Gerais"].values.tolist()
             fase2_1AC = ac["2ª fase - 1º dia"].values.tolist()
@@ -170,14 +172,14 @@ def criaChamadaGrafico (chamadakeys, chamadavalues):
 # Planilha 2020: https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-M1Qo-XJiDiNczwz7AY0vEhSlBvRqMEmPPBfMsks27GYqqIquaTneYklLOzyzwgI_2uIjLNuwhhdx/pub?gid=0&single=true&output=csv
 # Comentários 2020: https://docs.google.com/document/d/e/2PACX-1vQmhDyFRRS9XFCKKMdpZnalN2zsLbsBzHfSsoCVu1Pl5PmV7qrqwAQm4eFYyenYT7GVIo3XHz9lw754/pub
 arquivoCSV = input("Digite o link da planilha: ")
-tudo = pd.read_csv(arquivoCSV)
-ac = tudo[(tudo.Modalidade == "AC")]
-ep = tudo[tudo.Modalidade == "EP"]
-ppi = tudo[tudo.Modalidade == "PPI"]
-chamadas = tudo.pivot_table(index=["Chamada"], aggfunc="size")
+Geral = pd.read_csv(arquivoCSV)
+ac = Geral[(Geral.Modalidade == "AC")]
+ep = Geral[Geral.Modalidade == "EP"]
+ppi = Geral[Geral.Modalidade == "PPI"]
+chamadas = Geral.pivot_table(index=["Chamada"], aggfunc="size")
 chamadakeys = chamadas.keys().tolist()
 chamadavalues = chamadas.values.tolist()
-criaDados(categorias, tudo, ac, ep, ppi)
+criaDados(categorias, Geral, ac, ep, ppi)
 criaChamadaGrafico(chamadakeys, chamadavalues)
 
 html_str = '''<!DOCTYPE html>
@@ -188,6 +190,34 @@ html_str = '''<!DOCTYPE html>
     </head>
     <body>
         <p style="font-size: 50px; font-weight: bold; font-family: Lato; text-align: center;">Dados acerca da Fuvest 2020</p>
+        <h1 align="center">Dados informativos acerca das aprovações da Fuvest 2020</h1>
+        <center>
+            <h2>Geral</h2>
+            <p>{}</p>
+            <p>{}</p>
+            <p>{}</p>
+            <p>{}</p>
+            <p>{}</p>
+            <h2>AC</h2>
+            <p>{}</p>
+            <p>{}</p>
+            <p>{}</p>
+            <p>{}</p>
+            <p>{}</p>
+            <h2>EP</h2>
+            <p>{}</p>
+            <p>{}</p>
+            <p>{}</p>
+            <p>{}</p>
+            <p>{}</p>
+            <h2>PPI</h2>
+            <p>{}</p>
+            <p>{}</p>
+            <p>{}</p>
+            <p>{}</p>
+            <p>{}</p>
+        </center>
+        </br>
         <h1 align="center">Ocupação do curso por chamada</h1>
             <center><img src="chamadas.jpg" width=500 height=500></center>
         <h1 align="center">Ampla Concorrência</h1>
@@ -223,7 +253,12 @@ html_str = '''<!DOCTYPE html>
             </center>
         <h1 align="center">Mensagens dos Veteranos</h1>
     </body>
-</html>'''
+</html>'''.format(categoriasDados["Geral"][0], categoriasDados["Geral"][1], categoriasDados["Geral"][2], categoriasDados["Geral"][3],
+categoriasDados["Geral"][4], categoriasDados["AC"][0], categoriasDados["AC"][1], categoriasDados["AC"][2], categoriasDados["AC"][3],
+categoriasDados["AC"][4], categoriasDados["EP"][0], categoriasDados["EP"][1], categoriasDados["EP"][2], categoriasDados["EP"][3],
+categoriasDados["EP"][4], categoriasDados["PPI"][0], categoriasDados["PPI"][1], categoriasDados["PPI"][2], categoriasDados["PPI"][3],
+categoriasDados["PPI"][4]
+)
 html_file= open("index.html","w")
 html_file.write(html_str)
 html_file.close()
