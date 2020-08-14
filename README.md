@@ -22,11 +22,11 @@ Para instalar a biblioteca pdfkit, use o seguinte comando:
 O programa funciona a partir da criação de um Google Forms com perguntas iguais a desse [aqui](https://forms.gle/Qi5fPkwZbbtsBz3F7)
 
 Ao visualizar as respostas do seu Google Forms, é possível abrir uma planilha do Google Sheets com as respostas do formulário:
-<img src="IMAGES/forms.png" alt="Demonstração de como acessar o Google Sheets a partir do Forms"
+<img src="IMAGES/forms.png" alt="Demonstração de como acessar o Google Sheets a partir do Forms" class="align">
 
 Uma vez dentro da planilha, é preciso pegar a url relativa ao csv dessa planilha.
-<img src="IMAGES/planilha1.png" alt="Demonstração do caminho para acessar a url">
-<img src="IMAGES/planilha2.png" alt="Demonstração do caminho para acessar a url">
+<img src="IMAGES/planilha1.png" alt="Demonstração do caminho para acessar a url" class="align">
+<img src="IMAGES/planilha2.png" alt="Demonstração do caminho para acessar a url" class="align">
 
 ### Executando o programa
 
