@@ -168,6 +168,7 @@ def criaChamadaGrafico (chamadakeys, chamadavalues):
         
 
 # Planilha 2020: https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-M1Qo-XJiDiNczwz7AY0vEhSlBvRqMEmPPBfMsks27GYqqIquaTneYklLOzyzwgI_2uIjLNuwhhdx/pub?gid=0&single=true&output=csv
+# Comentários 2020: https://docs.google.com/document/d/e/2PACX-1vQmhDyFRRS9XFCKKMdpZnalN2zsLbsBzHfSsoCVu1Pl5PmV7qrqwAQm4eFYyenYT7GVIo3XHz9lw754/pub
 arquivoCSV = input("Digite o link da planilha: ")
 tudo = pd.read_csv(arquivoCSV)
 ac = tudo[(tudo.Modalidade == "AC")]
@@ -178,3 +179,51 @@ chamadakeys = chamadas.keys().tolist()
 chamadavalues = chamadas.values.tolist()
 criaDados(categorias, tudo, ac, ep, ppi)
 criaChamadaGrafico(chamadakeys, chamadavalues)
+
+html_str = '''<!DOCTYPE html>
+<html>
+    <head>
+        <title>Dados acerca da Fuvest 2020</title>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <p style="font-size: 50px; font-weight: bold; font-family: Lato; text-align: center;">Dados acerca da Fuvest 2020</p>
+        <h1 align="center">Ocupação do curso por chamada</h1>
+            <center><img src="chamadas.jpg" width=500 height=500></center>
+        <h1 align="center">Ampla Concorrência</h1>
+            <center>
+                <img src="AC/acConhecimento.jpg" alt="Histograma com as notas de Conhecimento Geral">
+                <img src="AC/acFase21.jpg" alt="Histograma com as notas do primeiro dia da segunda fase">
+                <br>
+                <img src="AC/acFase22.jpg" alt="Histograma com as notas do segundo dia da segunda fase">
+                <img src="AC/acRedacao.jpg" alt="Histograma com as notas da redação">
+                <br>
+                <img src="AC/acFinal.jpg" alt="Histograma com as notas finais">
+                <br>
+            </center>
+        <h1 align="center">Escola Pública</h1>
+            <center>
+                <img src="EP/epConhecimento.jpg" alt="Histograma com as notas de Conhecimento Geral" class="center">
+                <img src="EP/epFase21.jpg" alt="Histograma com as notas do primeiro dia da segunda fase" class="center">
+                <br>
+                <img src="EP/epFase22.jpg" alt="Histograma com as notas do segundo dia da segunda fase" class="center">
+                <img src="EP/epRedacao.jpg" alt="Histograma com as notas da redação" class="center">
+                <br>
+                <img src="EP/epFinal.jpg" alt="Histograma com as notas finais" class="center">
+            </center>
+        <h1 align="center">Pretos, Pardos e Indígenas</h1>
+            <center>
+                <img src="PPI/ppiConhecimento.jpg" alt="Histograma com as notas de Conhecimento Geral" class="center">
+                <img src="PPI/ppiFase21.jpg" alt="Histograma com as notas do primeiro dia da segunda fase" class="center">
+                <br>
+                <img src="PPI/ppiFase22.jpg" alt="Histograma com as notas do segundo dia da segunda fase" class="center">
+                <img src="PPI/ppiRedacao.jpg" alt="Histograma com as notas da redação" class="center">
+                <br>
+                <img src="PPI/ppiFinal.jpg" alt="Histograma com as notas finais" class="center">
+            </center>
+        <h1 align="center">Mensagens dos Veteranos</h1>
+    </body>
+</html>'''
+html_file= open("index.html","w")
+html_file.write(html_str)
+html_file.close()
