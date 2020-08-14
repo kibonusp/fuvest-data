@@ -3,36 +3,35 @@ Script para criação de PDF com gráficos acerca dos aprovados de um curso pela
 
 ### Instalando o repositório
 Para obter o repositório, use o seguinte comando:
-'''git clone https://github.com/kibonusp/fuvest-data.git'''
+```$ git clone https://github.com/kibonusp/fuvest-data.git```
 Para poder executar o programa, é necessário ter as bibliotecas **pandas**, **numpy**. **matplotlib** e **pdfkit**
 
 Para instalar a biblioteca pandas, use o seguinte comando:
-'''sudo pip install pandas'''
+```$ sudo pip install pandas```
 
 Para instalar a biblioteca numpy, use o seguinte comando:
-'''sudo pip install numpy'''
+```$ sudo pip install numpy```
 
 Para instalar a biblioteca matplotlib, use o seguinte comando:
-'''sudo pip install matplotlib'''
+```$ sudo pip install matplotlib```
 
 Para instalar a biblioteca pdfkit, use o seguinte comando:
-'''npm install pdfkit'''
+```$ npm install pdfkit```
 
 ### Obtendo o CSV de um Google Sheets a partir de um Google Forms
-O programa funciona a partir da criação de um Google Forms com as perguntas equivalentes a desse:
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSehxLmWWNWmVPkploww2h7hCckEc1VyT2lH5xql12aoZbdaJg/viewform?embedded=true" width="640" height="1614" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+O programa funciona a partir da criação de um Google Forms com perguntas iguais a desse [aqui](https://forms.gle/Qi5fPkwZbbtsBz3F7)
 
 Ao visualizar as respostas do seu Google Forms, é possível abrir uma planilha do Google Sheets com as respostas do formulário:
-IMAGES/forms.png
+<img src="IMAGES/forms.png" alt="Demonstração de como acessar o Google Sheets a partir do Forms"
 
 Uma vez dentro da planilha, é preciso pegar a url relativa ao csv dessa planilha.
-IMAGES/planilha1.png
-IMAGES/planilha2.png
+<img src="IMAGES/planilha1.png" alt="Demonstração do caminho para acessar a url">
+<img src="IMAGES/planilha2.png" alt="Demonstração do caminho para acessar a url">
 
 ### Executando o programa
 
 Para executar o programa, use o comando:
-'''python3 main.py'''
+```$ python3 main.py```
 
 O programa irá perguntar se você deseja criar um PDF para uma nova turma ou não.
 
