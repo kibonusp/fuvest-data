@@ -98,11 +98,6 @@ elif criacao.lower() == 'n':
     atualSair = input("Você deseja atualizar um pdf ou sair? (escreva 'atualizar' ou 'sair') ")
     if atualSair.lower() == "atualizar":
         encontrado = 1
-        atualizarURLpanilha = input("Você deseja atualizar o link da planilha? ('S' para sim e 'N' para não) ")
-        
-        if atualizarURLpanilha.lower() == 's':
-            arquivoCSV = input("Digite o novo link da planilha: ")
-
         unidade = input("Qual sua unidade de ensino? (ex: Poli) ")
         curso = input("Qual o seu curso? ")
         turma = int(input("Qual o seu ano de ingresso? "))
