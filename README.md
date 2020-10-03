@@ -4,19 +4,11 @@ Script para criação de PDF com gráficos acerca dos aprovados de um curso pela
 ### Instalando o repositório
 Para obter o repositório, use o seguinte comando:
 ```$ git clone https://github.com/kibonusp/fuvest-data.git```
-Para poder executar o programa, é necessário ter as bibliotecas **pandas**, **numpy**. **matplotlib** e **pdfkit**
+Antes de poder executar o programa, é necessário ter as bibliotecas **pandas**, **numpy**. **matplotlib** e **pdfkit**. Para isso, utilize:
+```
+pip install -r requirements.txt
+```
 
-Para instalar a biblioteca pandas, use o seguinte comando:
-```$ sudo pip install pandas```
-
-Para instalar a biblioteca numpy, use o seguinte comando:
-```$ sudo pip install numpy```
-
-Para instalar a biblioteca matplotlib, use o seguinte comando:
-```$ sudo pip install matplotlib```
-
-Para instalar a biblioteca pdfkit, use o seguinte comando:
-```$ npm install pdfkit```
 
 ### Obtendo o CSV de um Google Sheets a partir de um Google Forms
 O programa funciona a partir da criação de um Google Forms com perguntas iguais a desse [aqui](https://forms.gle/Qi5fPkwZbbtsBz3F7)
