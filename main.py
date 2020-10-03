@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import os
-import pdfkit
+#import pdfkit
 import sqlite3
 import sys
 
@@ -78,6 +78,7 @@ def graficoCategoria (categoria, datasets, notas):
 conn = sqlite3.connect('fuvest')
 cur = conn.cursor()
 criacao = input("Você deseja criar um pdf para uma nova turma? ('S' para sim e 'N' para não) ")
+
 if criacao.lower() == 's':
     arquivoCSV = input("Digite o link da planilha: ")
     unidade = input("Qual sua unidade de ensino? (ex: Poli) ")
@@ -92,10 +93,16 @@ if criacao.lower() == 's':
     cursoTuple = cur.fetchall()
     curso_id = list(cursoTuple[0])[0]
     cur.execute("INSERT INTO Unidade(nome, curso_id) VALUES (?, ?)", (unidade, curso_id))
+
 elif criacao.lower() == 'n':
     atualSair = input("Você deseja atualizar um pdf ou sair? (escreva 'atualizar' ou 'sair') ")
     if atualSair.lower() == "atualizar":
         encontrado = 1
+        atualizarURLpanilha = input("Você deseja atualizar o link da planilha? ('S' para sim e 'N' para não) ")
+        
+        if atualizarURLpanilha.lower() == 's':
+            arquivoCSV = input("Digite o novo link da planilha: ")
+
         unidade = input("Qual sua unidade de ensino? (ex: Poli) ")
         curso = input("Qual o seu curso? ")
         turma = int(input("Qual o seu ano de ingresso? "))
@@ -162,85 +169,85 @@ commentsHTMLFormat = comentarioHTML(comentarios)
 criaDados(categorias, notas)
 
 # Crio a página html
-html_str = '''<!DOCTYPE html>
+html_str = f'''<!DOCTYPE html>
 <html>
     <head>
         <title>Fuvest 2020</title>
         <meta charset="utf-8">
+        <link rel= "stylesheet" type="text/css" href= "../../../style.css" />
+
     </head>
     <body>
-        <p style="font-size: 50px; font-weight: bold; font-family: Lato; text-align: center;">Fuvest 2020 - {} {} - {}</p>
-        <h1 align="center">Dados informativos acerca das aprovações da Fuvest 2020</h1>
-        <center>
-            <h2>Geral</h2>
-            <p>{}</p>
-            <p>{}</p>
-            <p>{}</p>
-            <p>{}</p>
-            <p>{}</p>
-            <h2>AC</h2>
-            <p>{}</p>
-            <p>{}</p>
-            <p>{}</p>
-            <p>{}</p>
-            <p>{}</p>
-            <h2>EP</h2>
-            <p>{}</p>
-            <p>{}</p>
-            <p>{}</p>
-            <p>{}</p>
-            <p>{}</p>
-            <h2>PPI</h2>
-            <p>{}</p>
-            <p>{}</p>
-            <p>{}</p>
-            <p>{}</p>
-            <p>{}</p>
-        </center>
+        <img id = "logo" src ="../../../LogoUSP.png"/>
+        <h1 id= "titulo" ">Fuvest 2020 - {curso} {turma} - {unidade}</h1>
+        <h1 class = "subtitulo" >Dados informativos acerca das aprovações da Fuvest 2020</h1>
+        
+            <h2 class = "categoria" >Geral</h2>
+            <p>{categoriasDados["Geral"][0]}</p>
+            <p>{categoriasDados["Geral"][1]}</p>
+            <p>{categoriasDados["Geral"][2]}</p>
+            <p>{categoriasDados["Geral"][3]}</p>
+            <p>{categoriasDados["Geral"][4]}</p>
+            
+            <h2 class = "categoria" >AC</h2>
+            <p>{categoriasDados["AC"][0]}</p>
+            <p>{categoriasDados["AC"][1]}</p>
+            <p>{categoriasDados["AC"][2]}</p>
+            <p>{categoriasDados["AC"][3]}</p>
+            <p>{categoriasDados["AC"][4]}</p>
+            
+            <h2 class = "categoria" >EP</h2>
+            <p>{categoriasDados["EP"][0]}</p>
+            <p>{categoriasDados["EP"][1]}</p>
+            <p>{categoriasDados["EP"][2]}</p>
+            <p>{categoriasDados["EP"][3]}</p>
+            <p>{categoriasDados["EP"][4]}</p>
+            
+            <h2 class = "categoria" >PPI</h2>
+            <p>{categoriasDados["PPI"][0]}</p>
+            <p>{categoriasDados["PPI"][1]}</p>
+            <p>{categoriasDados["PPI"][2]}</p>
+            <p>{categoriasDados["PPI"][3]}</p>
+            <p>{categoriasDados["PPI"][4]}</p>
         </br>
-        <h1 align="center">Ocupação do curso por chamada</h1>
-            <center><img src="chamadas.jpg" width=500 height=500></center>
-        <h1 align="center">Ampla Concorrência</h1>
-            <center>
-                <img src="AC/acConhecimento.jpg" alt="Histograma com as notas de Conhecimento Geral">
-                <img src="AC/acFase21.jpg" alt="Histograma com as notas do primeiro dia da segunda fase">
+        
+        <h1 class = "subtitulo" >Ocupação do curso por chamada</h1>
+            <img id = "pizza" src="chamadas.jpg">
+        
+        <h1 class = "subtitulo" >Gráficos por modalidade</h1> 
+        <h1 class = "categoria" >Ampla Concorrência</h1>
+                <img class = "graficos" src="AC/acConhecimento.jpg" alt="Histograma com as notas de Conhecimento Geral">
+                <img class = "graficos" src="AC/acFase21.jpg" alt="Histograma com as notas do primeiro dia da segunda fase">
                 <br>
-                <img src="AC/acFase22.jpg" alt="Histograma com as notas do segundo dia da segunda fase">
-                <img src="AC/acRedacao.jpg" alt="Histograma com as notas da redação">
+                <img class = "graficos" src="AC/acFase22.jpg" alt="Histograma com as notas do segundo dia da segunda fase">
+                <img class = "graficos" src="AC/acRedacao.jpg" alt="Histograma com as notas da redação">
                 <br>
-                <img src="AC/acFinal.jpg" alt="Histograma com as notas finais">
+                <img class = "graficos" src="AC/acFinal.jpg" alt="Histograma com as notas finais">
                 <br>
-            </center>
-        <h1 align="center">Escola Pública</h1>
-            <center>
-                <img src="EP/epConhecimento.jpg" alt="Histograma com as notas de Conhecimento Geral" class="center">
-                <img src="EP/epFase21.jpg" alt="Histograma com as notas do primeiro dia da segunda fase" class="center">
+        
+        <h1 class = "categoria" >Escola Pública</h1>
+                <img class = "graficos" src="EP/epConhecimento.jpg" alt="Histograma com as notas de Conhecimento Geral" class="center">
+                <img class = "graficos" src="EP/epFase21.jpg" alt="Histograma com as notas do primeiro dia da segunda fase" class="center">
                 <br>
-                <img src="EP/epFase22.jpg" alt="Histograma com as notas do segundo dia da segunda fase" class="center">
-                <img src="EP/epRedacao.jpg" alt="Histograma com as notas da redação" class="center">
+                <img class = "graficos" src="EP/epFase22.jpg" alt="Histograma com as notas do segundo dia da segunda fase" class="center">
+                <img class = "graficos" src="EP/epRedacao.jpg" alt="Histograma com as notas da redação" class="center">
                 <br>
-                <img src="EP/epFinal.jpg" alt="Histograma com as notas finais" class="center">
-            </center>
-        <h1 align="center">Pretos, Pardos e Indígenas</h1>
-            <center>
-                <img src="PPI/ppiConhecimento.jpg" alt="Histograma com as notas de Conhecimento Geral" class="center">
-                <img src="PPI/ppiFase21.jpg" alt="Histograma com as notas do primeiro dia da segunda fase" class="center">
+                <img class = "graficos" src="EP/epFinal.jpg" alt="Histograma com as notas finais" class="center">
+        
+        <h1 class = "categoria" >Pretos, Pardos e Indígenas</h1>
+                <img class = "graficos" src="PPI/ppiConhecimento.jpg" alt="Histograma com as notas de Conhecimento Geral" class="center">
+                <img class = "graficos" src="PPI/ppiFase21.jpg" alt="Histograma com as notas do primeiro dia da segunda fase" class="center">
                 <br>
-                <img src="PPI/ppiFase22.jpg" alt="Histograma com as notas do segundo dia da segunda fase" class="center">
-                <img src="PPI/ppiRedacao.jpg" alt="Histograma com as notas da redação" class="center">
+                <img class = "graficos" src="PPI/ppiFase22.jpg" alt="Histograma com as notas do segundo dia da segunda fase" class="center">
+                <img class = "graficos" src="PPI/ppiRedacao.jpg" alt="Histograma com as notas da redação" class="center">
                 <br>
-                <img src="PPI/ppiFinal.jpg" alt="Histograma com as notas finais" class="center">
-            </center>
-        <h1 align="center">Mensagens dos Veteranos</h1>
-            <center>
-                {}
-            </center>
+                <img class = "graficos" src="PPI/ppiFinal.jpg" alt="Histograma com as notas finais" class="center">
+        
+        <h1 class = "subtitulo" >Mensagens dos Veteranos</h1>
+                {commentsHTMLFormat}
+            
     </body>
-</html>'''.format(curso, turma, unidade, categoriasDados["Geral"][0], categoriasDados["Geral"][1], categoriasDados["Geral"][2], categoriasDados["Geral"][3],
- categoriasDados["Geral"][4], categoriasDados["AC"][0], categoriasDados["AC"][1], categoriasDados["AC"][2], categoriasDados["AC"][3],
-  categoriasDados["AC"][4], categoriasDados["EP"][0], categoriasDados["EP"][1], categoriasDados["EP"][2], categoriasDados["EP"][3],
-   categoriasDados["EP"][4], categoriasDados["PPI"][0], categoriasDados["PPI"][1], categoriasDados["PPI"][2], categoriasDados["PPI"][3],
-    categoriasDados["PPI"][4], commentsHTMLFormat)
+</html>'''
 
 html_file= open("{}/{}/{}/index.html".format(unidade, curso, turma),"w")
 html_file.write(html_str)
