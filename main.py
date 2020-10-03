@@ -137,9 +137,7 @@ conn.commit()
 str(turma)
 if not os.path.isdir("{}/{}/{}".format(unidade, curso, str(turma))):
     os.makedirs("{}/{}/{}".format(unidade, curso, str(turma)))
-
-# Planilha 2020: https://docs.google.com/spreadsheets/d/e/2PACX-1vS7-ibfSlLbqw3L6lhcXCIOK1KA2TJhIoCQfM5RXJmzvs2EGPHm3GvWdgYSf7cc3a0jqIZizvjtie1o/pub?gid=1644314308&single=true&output=csv
-
+    
 # Leio o arquivo csv
 geral = pd.read_csv(arquivoCSV)
 
