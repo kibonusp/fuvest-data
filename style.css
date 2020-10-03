@@ -1,0 +1,56 @@
+html, body {
+    height: 100%;
+    text-align: center;
+}
+
+html {
+    display: table;
+    margin: auto;
+}
+
+body {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+h1, h2, p {
+    font-family: Lato, Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+}
+
+#titulo {
+    font-size: 50px;
+    font-weight: bold;
+    color: #3c016b;
+    text-align: center;
+}
+
+.subtitulo {
+    font-weight: 700;
+    color: #3c016b;
+}
+
+.categoria {
+    font-size: 30px;
+    font-weight: 500;
+    color: #01597c;
+}
+
+#logo {
+    display: inline;
+    width: 100px;
+    height: 100px;
+    padding-top: 20px; 
+    margin-bottom: -20px;
+}
+
+.graficos {
+    max-width: 450px;
+    max-height: 450px;
+    width: auto;
+    height: auto;
+}
+
+#pizza {
+    width: 500px;
+    height: auto;
+}
